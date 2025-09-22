@@ -1,0 +1,30 @@
+on:
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+
+jobs:
+  store-front:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: src
+
+      - name: Build the package
+        run: npm run build
+        working-directory: src
+
+      - name: Zip build output
+        run: zip -r dist.zip build
+        working-directory: src
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: src/dist.zip

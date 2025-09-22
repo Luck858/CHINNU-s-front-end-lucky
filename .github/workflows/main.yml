@@ -12,18 +12,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: .   # 👈 same folder as package.json
-
+       
       - name: Build the package
         run: npm run start
-        working-directory: .   # 👈 same folder as package.json
-
-      - name: Zip build output
-        run: zip -r dist.zip build
-        working-directory: .   # 👈 React outputs build/ folder here
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: dist.zip
+    
+      - name: test
+        run: npm test
+   
+      

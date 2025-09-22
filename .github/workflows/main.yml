@@ -2,10 +2,9 @@ on:
   push:
     branches: 
       - main
-  workflow_dispatch:
 
 jobs:
-  store-front:
+  build:   # 👈 you must give a job name here
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code

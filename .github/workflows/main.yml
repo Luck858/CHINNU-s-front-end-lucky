@@ -4,7 +4,7 @@ on:
       - main
 
 jobs:
-  build:   # 👈 you must give a job name here
+  build:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -12,18 +12,18 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: src
+        working-directory: .   # 👈 same folder as package.json
 
       - name: Build the package
         run: npm run build
-        working-directory: src
+        working-directory: .   # 👈 same folder as package.json
 
       - name: Zip build output
         run: zip -r dist.zip build
-        working-directory: src
+        working-directory: .   # 👈 React outputs build/ folder here
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: src/dist.zip
+          path: dist.zip
